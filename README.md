@@ -3,7 +3,7 @@ Repository DescriptionQueue Using Linked List is a C++ program that implements a
 
 
 
-problem statement:
+1.problem statement:
 Hospitals face significant challenges in managing patient queues efficiently. Static data structures (like standard fixed-size arrays) lead to memory waste or queue overflow when patient intake spikes suddenly. Traditional manual or fixed systems fail to handle real-time queue additions, processing patients on a First-In, First-Out (FIFO) basis, and dynamic cancellations effectively.
 This project implements a dynamic Hospital Patient Waiting Queue Management System using a Singly Linked List in C/C++. It dynamically allocates memory for each patient, ensuring zero memory overflow and optimal dynamic space management.
 
@@ -16,7 +16,8 @@ Time & Space Efficiency: Achieve O(1) constant time complexity for enqueuing and
 3. Data Structure Design
 Node Structure
 Each node represents an individual patient in the queue:
-struct PatientNode {
+struct PatientNode 
+{
     int patientID;
     string name;
     int age;
@@ -25,7 +26,8 @@ struct PatientNode {
 };
 
 4. Key Queue Operations
-## Objectives
+
+A.Objectives
 1. Implement dynamic memory allocation with zero queue overflow.
 2. Achieve efficient $O(1)$ Enqueue and Dequeue operations.
 3. Serve patients in strict order of arrival (FIFO basis).
@@ -34,6 +36,7 @@ struct PatientNode {
 6. Display current waiting queue status in real time.
 
 5. System Algorithms
+
 Algorithm 1: Enqueue (Register New Patient)
 Allocate memory for a new node newNode.
 Input patient details (ID, Name, Age, Condition).
@@ -53,19 +56,4 @@ If front == NULL, set rear = NULL (Queue becomes empty).
 Display served patient details.
 Free memory using delete temp or free(temp).
 
-6. Project Setup & Execution
-Prerequisites
-GCC/G++ Compiler or IDE (VS Code, Code::Blocks)
-Build & Run
-# Clone the repository
-git clone https://github.com/your-username/hospital-queue-linkedlist.git
-
-# Navigate to project folder
-cd hospital-queue-linkedlist
-
-# Compile code
-g++ main.cpp -o hospital_queue
-
-# Run application
-./hospital_queue
 
