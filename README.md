@@ -37,23 +37,49 @@ A.Objectives
 
 5. System Algorithms
 
-Algorithm 1: Enqueue (Register New Patient)
-Allocate memory for a new node newNode.
-Input patient details (ID, Name, Age, Condition).
-Set newNode->next = NULL.
-If rear == NULL (Queue is empty):
-Set front = newNode
-Set rear = newNode
-Else (Queue is not empty):
-Set rear->next = newNode
-Set rear = newNode
-Display confirmation message.
-Algorithm 2: Dequeue (Doctor Consults Patient)
-Check if front == NULL. If true, print "Queue is empty" and exit.
-Create a temporary pointer temp = front.
-Move the front pointer forward: front = front->next.
-If front == NULL, set rear = NULL (Queue becomes empty).
-Display served patient details.
-Free memory using delete temp or free(temp).
+Step 1: Start the program.
+
+Step 2: Initialize front and rear pointers to NULL.
+
+Step 3: Display the menu with the following options:
+Step 4: Accept the user's choice.
+
+Step 5: If the choice is 1 (Enqueue):
+
+A) Create a new node using dynamic memory allocation.
+
+B) Accept the patient ID and patient name.
+
+C) Set the new node's next pointer to NULL.
+
+D) If the queue is empty, set both front and rear to the new node.
+
+E) Otherwise, connect the new node to the current rear node and update rear.
+
+F) Display a success message.
+
+Step 6: If the choice is 2 (Dequeue):
+Check whether front is NULL.
+If the queue is empty, display an appropriate message.
+Otherwise, store the front node in a temporary pointer.
+Display the removed patient's details.
+Move front to the next node.
+If the queue becomes empty, set rear to NULL.
+Free the memory of the removed node.
+
+Step 7: If the choice is 3 (Display):
+Check whether the queue is empty.
+If empty, display a message.
+Otherwise, start from front.
+Traverse each node until NULL is reached.
+Display each patient's ID and name.
+
+Step 8: If the choice is 4, display the exit message and terminate the program.
+
+Step 9: If the choice is invalid, display an error message.
+
+Step 10: Repeat Steps 3–9 until the user selects Exit.
+
+Step 11: Stop the program.
 
 
