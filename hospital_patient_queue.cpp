@@ -1,31 +1,37 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <iostream>
+#include <string>
+#include <limits>
+using namespace std;
 
 struct Node
 {
     int patientID;
-    char patientName[50];
-    struct Node *next;
+    string patientName;
+    Node* next;
 };
 
-struct Node *front = NULL;
-struct Node *rear = NULL;
+Node* front = NULL;
+Node* rear =NULL;
 
+// Add a patient to the queue
 void enqueue()
 {
-    struct Node *newNode;
-    int id;
-    
-    newNode = (struct Node *)malloc(sizeof(struct Node));
+    Node* newNode = new Node;
 
-    printf("Enter Patient ID: ");
-    scanf("%d", &id);
+    cout << "Enter Patient ID: ";
+    if (!(cin >> newNode->patientID))
+    {
+        cout << "Invalid Patient ID.\n";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        delete newNode;
+        return;
+    }
 
-    printf("Enter Patient Name: ");
-    scanf("%49s", newNode->patientName);
+    cout << "Enter Patient Name: ";
+    cin >> ws;
+    getline(cin, newNode->patientName);
 
-    newNode->patientID = id;
     newNode->next = NULL;
 
     if (rear == NULL)
@@ -38,23 +44,23 @@ void enqueue()
         rear = newNode;
     }
 
-    printf("Patient added successfully.\n");
+    cout << "Patient added successfully!\n";
 }
 
+// Remove a patient from the front
 void dequeue()
 {
-    struct Node *temp;
-
     if (front == NULL)
     {
-        printf("Queue is empty. No patient to remove.\n");
+        cout << "Queue is empty. No patient to remove.\n";
         return;
     }
 
-    temp = front;
+    Node* temp = front;
 
-    printf("Patient removed: %d - %s\n",
-           temp->patientID, temp->patientName);
+    cout << "Patient removed: "
+         << temp->patientID << " - "
+         << temp->patientName << '\n';
 
     front = front->next;
 
@@ -63,30 +69,42 @@ void dequeue()
         rear = NULL;
     }
 
-    free(temp);
+    delete temp;
 }
 
+// Display all patients
 void display()
 {
-    struct Node *temp;
-
     if (front == NULL)
     {
-        printf("No patients in the waiting queue.\n");
+        cout << "No patients in the waiting queue.\n";
         return;
     }
 
-    temp = front;
+    Node* temp = front;
 
-    printf("\nHospital Patient Waiting Queue:\n");
+    cout << "\nHospital Patient Waiting Queue:\n";
 
     while (temp != NULL)
     {
-        printf("Patient ID: %d, Name: %s\n",
-               temp->patientID, temp->patientName);
+        cout << "Patient ID: " << temp->patientID
+             << ", Name: " << temp->patientName << '\n';
 
         temp = temp->next;
     }
+}
+
+// Release memory when the program ends
+void clearQueue()
+{
+    while (front != NULL)
+    {
+        Node* temp = front;
+        front = front->next;
+        delete temp;
+    }
+
+    rear = NULL;
 }
 
 int main()
@@ -95,13 +113,20 @@ int main()
 
     do
     {
-        printf("\n===== Hospital Patient Waiting Queue =====\n");
-        printf("1. Enqueue Patient\n");
-        printf("2. Dequeue Patient\n");
-        printf("3. Display Queue\n");
-        printf("4. Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
+        cout << "\n===== Hospital Patient Waiting Queue =====\n";
+        cout << "1. Enqueue Patient\n";
+        cout << "2. Dequeue Patient\n";
+        cout << "3. Display Queue\n";
+        cout << "4. Exit\n";
+        cout << "Enter your choice: ";
+
+        if (!(cin >> choice))
+        {
+            cout << "Invalid input. Please enter a number.\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            continue;
+        }
 
         switch (choice)
         {
@@ -118,14 +143,16 @@ int main()
                 break;
 
             case 4:
-                printf("Program ended.\n");
+                cout << "Program ended successfully.\n";
                 break;
 
             default:
-                printf("Invalid choice. Please try again.\n");
+                cout << "Invalid choice. Please try again.\n";
         }
 
     } while (choice != 4);
+
+    clearQueue();
 
     return 0;
 }
