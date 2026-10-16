@@ -156,3 +156,123 @@ int main()
 
     return 0;
 }
+
+
+New program....
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Node
+{
+    int id, age;
+    string name, address, gender;
+    Node* next;
+};
+
+Node *front = NULL, *rear = NULL;
+
+void enqueue()
+{
+    Node* temp = new Node;
+
+    cout << "Enter Patient ID: ";
+    cin >> temp->id;
+
+    cout << "Enter Name: ";
+    cin >> ws;
+    getline(cin, temp->name);
+
+    cout << "Enter Age: ";
+    cin >> temp->age;
+
+    cout << "Enter Address: ";
+    cin >> ws;
+    getline(cin, temp->address);
+
+    cout << "Enter Gender: ";
+    getline(cin, temp->gender);
+
+    temp->next = NULL;
+
+    if (rear == NULL)
+        front = rear = temp;
+    else
+    {
+        rear->next = temp;
+        rear = temp;
+    }
+
+    cout << "Patient added successfully!\n";
+}
+
+void dequeue()
+{
+    if (front == NULL)
+    {
+        cout << "Queue is empty!\n";
+        return;
+    }
+
+    Node* temp = front;
+
+    cout << "Removed Patient: " << temp->name << endl;
+
+    front = front->next;
+
+    if (front == NULL)
+        rear = NULL;
+
+    delete temp;
+}
+
+void display()
+{
+    Node* temp = front;
+
+    if (temp == NULL)
+    {
+        cout << "No patients in queue!\n";
+        return;
+    }
+
+    while (temp != NULL)
+    {
+        cout << "\nPatient ID: " << temp->id;
+        cout << "\nName: " << temp->name;
+        cout << "\nAge: " << temp->age;
+        cout << "\nAddress: " << temp->address;
+        cout << "\nGender: " << temp->gender << endl;
+
+        temp = temp->next;
+    }
+}
+
+int main()
+{
+    int choice;
+
+    do
+    {
+        cout << "\n1. Add Patient";
+        cout << "\n2. Remove Patient";
+        cout << "\n3. Display Patients";
+        cout << "\n4. Exit";
+        cout << "\nEnter choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+            case 1: enqueue(); break;
+            case 2: dequeue(); break;
+            case 3: display(); break;
+            case 4: cout << "Program ended."; break;
+            default: cout << "Invalid choice!";
+        }
+
+    } while (choice != 4);
+
+    return 0;
+}
